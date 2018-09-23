@@ -4,8 +4,6 @@ import requests
 
 class CentralBankClient:
     BASE_URL = 'https://ptax.bcb.gov.br/ptax_internet/'
-    US_DOLAR = 61
-    EURO = 222
 
     def get(self, endpoint, params):
         url = '%s%s' % (self.BASE_URL, endpoint)
