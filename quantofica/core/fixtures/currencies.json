@@ -1,0 +1,20 @@
+[
+{
+    "model": "core.currency",
+    "pk": "EUR",
+    "fields": {
+        "name": "Euro",
+        "symbol": "\u20ac",
+        "central_bank_reference": 222
+    }
+},
+{
+    "model": "core.currency",
+    "pk": "USD",
+    "fields": {
+        "name": "Dolar Americano",
+        "symbol": "US$",
+        "central_bank_reference": 61
+    }
+}
+]

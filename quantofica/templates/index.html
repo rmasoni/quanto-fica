@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block content %}
   <form>
     {{ form.non_field_errors }}
@@ -8,11 +10,11 @@
       {{ form.moeda }} {{ form.moeda.errors }}
       {{ form.valor }} {{ form.valor.errors }}
       <button class="input__button" type="submit">Calcular</button>
-      <p class="input__disclaimer">Atualizado em <time datetime="2018-09-25 20:30:00-03:00">25/09/2018 às 20h30 (Brasília)</time>.</p>
+      <p class="input__disclaimer">Atualizado em <time datetime="{{ exchange_date|date:'c' }}">{{ exchange_date }} (Brasília)</time>.</p>
     </section>
     {% if output %}
       <section class="output">
-        <output class="output__value" for="input__field">{{ output }}</output>
+        <output class="output__value" for="input__field">R$ {{ output|intcomma }}</output>
       </section>
     {% endif %}
   </form>

@@ -7,6 +7,9 @@ class Currency(models.Model):
     code = models.CharField('código', max_length=3, primary_key=True)
     name = models.CharField('nome', max_length=100)
     symbol = models.CharField('símbolo', max_length=5)
+    central_bank_reference = models.IntegerField()
+
+    __current_rate = None
 
     class Meta:
         verbose_name = 'moeda'
@@ -15,8 +18,11 @@ class Currency(models.Model):
     def __str__(self):
         return self.symbol
 
-    def get_current_rate(self):
-        return self.rates.order_by('date').first()
+    @property
+    def current_rate(self):
+        if self.__current_rate is None:
+            self.__current_rate = self.rates.order_by('date').first()
+        return self.__current_rate
 
 
 class Rate(models.Model):
