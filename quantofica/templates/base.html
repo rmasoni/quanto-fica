@@ -1,10 +1,11 @@
-<!doctype html>
+{% load static %}<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Quanto Fica no Nubank?</title>
+  <title>{% block title %}Quanto Fica no Nubank?{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
 </head>
 <body>
 
@@ -14,27 +15,14 @@
 </header>
 
 <main class="site__body">
-
-  <section class="input">
-    <label class="input__label" for="input__field">Valor da compra</label>
-    <select class="input__unit">
-      <option value="usd">US$</option>
-    </select>
-    <input class="input__field" id="input__field" type="number" min="1" max="10000" step="any" autofocus required>
-    <button class="input__button" type="button">Calcular</button>
-    <p class="input__disclaimer">Atualizado em <time datetime="2018-09-25 20:30:00-03:00">25/09/2018 às 20h30 (Brasília)</time>.</p>
-  </section>
-
-  <section class="output">
-    <output class="output__value" for="input__field"></output>
-  </section>
-
+  {% block content %}
+  {% endblock %}
 </main>
 
 <footer class="site__footer">
   <p class="site__disclaimer">Projeto independente e <a href="https://gitlab.com/rmasoni/quanto-fica">open source</a>, sem nenhuma relação com a Nubank.</p>
   <p class="site__credits">Criado e mantido por <a href="http://sprnv.co" target="_blank">Rafael Masoni</a> e <a href="http://vitorfs.com" target="_blank">Vitor Freitas</a>.</p>
 </footer>
-
+<script src="{% static 'js/app.js' %}"></script>
 </body>
 </html>
