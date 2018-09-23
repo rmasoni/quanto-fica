@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.utils import timezone
 
 from quantofica.core.forms import NubankExchangeRateForm
+from quantofica.core.models import Currency
 from quantofica.core.utils import previous_weekday
 
 
@@ -16,7 +17,12 @@ def home(request):
         if form.is_valid():
             output = form.calculate()
     else:
-        form = NubankExchangeRateForm()
+        initial = dict()
+        try:
+            initial['moeda'] = Currency.objects.get(code='USD')
+        except Currency.DoesNotExist:
+            pass
+        form = NubankExchangeRateForm(initial=initial)
     return render(request, 'index.html', {
         'form': form,
         'exchange_date': exchange_date,
