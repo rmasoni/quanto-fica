@@ -36,5 +36,5 @@ class NubankExchangeRateForm(forms.Form):
         purchase_value = self.cleaned_data.get('valor')
         rate = currency.get_current_rate()
         total = round((purchase_value * rate.value) * decimal.Decimal(1.1038), 2)
-        formatted_total = '{symbol} {total}'.format(symbol=currency.symbol, total=total)
+        formatted_total = 'R$ {total}'.format(symbol=currency.symbol, total=total)
         return formatted_total
