@@ -21,7 +21,7 @@ class Currency(models.Model):
     @property
     def current_rate(self):
         if self.__current_rate is None:
-            self.__current_rate = self.rates.order_by('date').first()
+            self.__current_rate = self.rates.order_by('-date').first()
         return self.__current_rate
 
 
