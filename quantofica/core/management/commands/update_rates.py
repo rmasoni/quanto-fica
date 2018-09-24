@@ -30,6 +30,8 @@ class Command(BaseCommand):
             Rate.objects.update_or_create(currency=currency, date=rate_date, defaults={
                 'value': sell_rate
             })
+            currency.updated_at = timezone.now()
+            currency.save(update_fields=['updated_at'])
             self.stdout.write(self.style.SUCCESS('Updated rate: {currency} - {date} - {value}'.format(
                 currency=currency.code, date=rate_date, value=sell_rate
             )))
