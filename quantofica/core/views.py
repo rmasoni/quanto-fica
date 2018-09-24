@@ -1,30 +1,29 @@
-import pytz
 from django.shortcuts import render
-from django.utils import timezone
 
 from quantofica.core.forms import NubankExchangeRateForm
 from quantofica.core.models import Currency
-from quantofica.core.utils import previous_weekday
 
+
+def get_default_currency():
+    currency, created = Currency.objects.get_or_create(code='USD', defaults={
+        'name': 'Dolar Americano',
+        'symbol': 'US$',
+        'central_bank_reference': 61
+    })
+    return currency
 
 def home(request):
     output = None
-    date = previous_weekday(timezone.now())
-    exchange_date = timezone.datetime(year=date.year, month=date.month, day=date.day,
-                                      hour=14, minute=00, second=0, tzinfo=pytz.timezone('America/Sao_Paulo'))
+    default_currency = get_default_currency()
     if 'moeda' in request.GET and 'valor' in request.GET:
         form = NubankExchangeRateForm(request.GET)
         if form.is_valid():
             output = form.calculate()
+        default_currency = form.cleaned_data.get('moeda', default_currency)
     else:
-        initial = dict()
-        try:
-            initial['moeda'] = Currency.objects.get(code='USD')
-        except Currency.DoesNotExist:
-            pass
-        form = NubankExchangeRateForm(initial=initial)
+        form = NubankExchangeRateForm(initial={'moeda': default_currency})
     return render(request, 'index.html', {
         'form': form,
-        'exchange_date': exchange_date,
+        'exchange_date': default_currency.updated_at,
         'output': output
     })

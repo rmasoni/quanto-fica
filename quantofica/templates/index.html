@@ -10,7 +10,9 @@
       {{ form.moeda }} {{ form.moeda.errors }}
       {{ form.valor }} {{ form.valor.errors }}
       <button class="input__button" type="submit">Calcular</button>
-      <p class="input__disclaimer">Atualizado em <time datetime="{{ exchange_date|date:'c' }}">{{ exchange_date }} (Brasília)</time>.</p>
+      {% if exchange_date %}
+        <p class="input__disclaimer">Atualizado em <time datetime="{{ exchange_date|date:'c' }}">{{ exchange_date }} (Brasília)</time>.</p>
+      {% endif %}
     </section>
     {% if output %}
       <section class="output">
