@@ -6,7 +6,7 @@ from .models import Currency
 
 
 class NubankExchangeRateForm(forms.Form):
-    moeda = forms.ModelChoiceField(
+    currency = forms.ModelChoiceField(
         queryset=Currency.objects.all(),
         empty_label=None,
         required=True,
@@ -17,7 +17,7 @@ class NubankExchangeRateForm(forms.Form):
 
         )
     )
-    valor = forms.DecimalField(
+    value = forms.DecimalField(
         max_digits=10,
         decimal_places=2,
         label='Valor da compra',
@@ -32,7 +32,7 @@ class NubankExchangeRateForm(forms.Form):
     )
 
     def calculate(self):
-        currency = self.cleaned_data.get('moeda')
-        purchase_value = self.cleaned_data.get('valor')
+        currency = self.cleaned_data.get('currency')
+        purchase_value = self.cleaned_data.get('value')
         total = round((purchase_value * currency.current_rate.value) * decimal.Decimal(1.1038), 2)
         return total
