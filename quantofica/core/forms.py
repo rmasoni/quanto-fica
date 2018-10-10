@@ -14,7 +14,6 @@ class NubankExchangeRateForm(forms.Form):
             attrs={
                 'class': 'input__unit'
             },
-
         )
     )
     value = forms.DecimalField(
