@@ -5,19 +5,25 @@
 {% block content %}
   <form>
     {{ form.non_field_errors }}
+
     <section class="input">
+
       <label class="input__label" for="id_value">{{ form.value.label }}</label>
       {{ form.currency }} {{ form.currency.errors }}
       {{ form.value }} {{ form.value.errors }}
       <button class="input__button" type="submit">Calcular</button>
+
       {% if exchange_date %}
         <p class="input__disclaimer">Atualizado em <time datetime="{{ exchange_date|date:'c' }}">{{ exchange_date }} (Brasília)</time>.</p>
       {% endif %}
+
     </section>
+
     {% if output %}
       <section class="output">
         <output class="output__value" for="input__field">R$ {{ output|intcomma }}</output>
       </section>
     {% endif %}
+
   </form>
 {% endblock %}

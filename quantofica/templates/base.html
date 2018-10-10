@@ -1,4 +1,6 @@
-{% load static %}<!doctype html>
+{% load static %}
+
+<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -9,20 +11,22 @@
 </head>
 <body>
 
-<header class="site__header">
-  <h1 class="site__title">Quanto Fica?</h1>
-  <p class="site__subtitle">Saiba com precisão quanto vai pagar em Reais por compras internacionais feitas com seu <a href="https://www.nubank.com.br" target="_blank">Nubank</a>!</p>
-</header>
+  <header class="site__header">
+    <h1 class="site__title">Quanto Fica?</h1>
+    <p class="site__subtitle">Saiba com precisão quanto vai pagar em Reais por compras internacionais feitas com seu <a href="https://www.nubank.com.br" target="_blank">Nubank</a>!</p>
+  </header>
 
-<main class="site__body">
-  {% block content %}
-  {% endblock %}
-</main>
+  <main class="site__body">
+    {% block content %}
+    {% endblock %}
+  </main>
 
-<footer class="site__footer">
-  <p class="site__disclaimer">Projeto independente e <a href="https://gitlab.com/rmasoni/quanto-fica">open source</a>, sem nenhuma relação com a Nubank.</p>
-  <p class="site__credits">Criado e mantido por <a href="http://sprnv.co" target="_blank">Rafael Masoni</a> e <a href="http://vitorfs.com" target="_blank">Vitor Freitas</a>.</p>
-</footer>
-<script src="{% static 'js/app.js' %}"></script>
+  <footer class="site__footer">
+    <p class="site__disclaimer">Projeto independente e <a href="https://gitlab.com/rmasoni/quanto-fica">open source</a>, sem nenhuma relação com a Nubank.</p>
+    <p class="site__credits">Criado e mantido por <a href="http://sprnv.co" target="_blank">Rafael Masoni</a> e <a href="http://vitorfs.com" target="_blank">Vitor Freitas</a>.</p>
+  </footer>
+
+  <script src="{% static 'js/app.js' %}"></script>
+
 </body>
 </html>
