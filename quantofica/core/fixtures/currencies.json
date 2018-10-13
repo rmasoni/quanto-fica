@@ -4,7 +4,7 @@
     "pk": "EUR",
     "fields": {
         "name": "Euro",
-        "symbol": "\u20ac",
+        "symbol": "€",
         "central_bank_reference": 222
     }
 },
@@ -12,7 +12,7 @@
     "model": "core.currency",
     "pk": "USD",
     "fields": {
-        "name": "Dolar Americano",
+        "name": "Dólar Americano",
         "symbol": "US$",
         "central_bank_reference": 61
     }
