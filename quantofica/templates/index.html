@@ -8,9 +8,8 @@
 
     <section class="input">
 
-      <label class="input__label" for="id_value">{{ form.value.label }}</label>
       {{ form.currency }} {{ form.currency.errors }}
-      {{ form.value }} {{ form.value.errors }}
+      <input class="input__field" id="input__field" name="{{ form.value.name }}" value="{{ form.value.value }}" type="number" min="1" max="10000" step="any" autocomplete="off" autofocus required> {{ form.value.errors }}
       <button class="input__button" type="submit">Calcular</button>
 
       {% if exchange_date %}
@@ -22,6 +21,7 @@
     {% if output %}
       <section class="output">
         <output class="output__value" for="input__field">R$ {{ output|intcomma }}</output>
+        <p class="output__disclaimer">Esse é o valor que você vai pagar, caso a compra seja aprovada e processada hoje.</p>
       </section>
     {% endif %}
 
