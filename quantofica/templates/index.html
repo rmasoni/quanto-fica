@@ -20,8 +20,16 @@
 
     {% if output %}
       <section class="output">
-        <output class="output__value" for="input__field">R$ {{ output|intcomma }}</output>
+        <output class="output__value" for="input__field">R$ {{ output.total|intcomma }}</output>
         <p class="output__disclaimer">Esse é o valor que você vai pagar, caso a compra seja aprovada e processada hoje.</p>
+      </section>
+
+      <section class="details" style="text-align: left; width: 500px; margin: 0 auto;">
+        <code>
+          Cotação Nubank: R$ {{ output.nubank_exchange_rate|intcomma }} (PTAX Venda R$ {{ output.ptax_exchange_rate|intcomma }} + 4% Spread)<br>
+          Subtotal: R$ {{ output.subtotal|intcomma }}<br>
+          Impostos: R$ {{ output.iof|intcomma }} (6,18% IOF)
+        </code>
       </section>
     {% endif %}
 

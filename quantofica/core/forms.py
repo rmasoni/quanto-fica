@@ -1,4 +1,4 @@
-import decimal
+from decimal import ROUND_HALF_UP, Decimal
 
 from django import forms
 
@@ -28,5 +28,20 @@ class NubankExchangeRateForm(forms.Form):
     def calculate(self):
         currency = self.cleaned_data.get('currency')
         purchase_value = self.cleaned_data.get('value')
-        total = round((purchase_value * currency.current_rate.value) * decimal.Decimal(1.1038), 2)
-        return total
+        exchange_rate = currency.current_rate.value
+        spread = Decimal('0.04')
+        nubank_exchange_rate = exchange_rate + (exchange_rate * spread)
+        brl_purchase_value = purchase_value * nubank_exchange_rate
+        iof_rate = Decimal('0.0638')
+        iof = brl_purchase_value * iof_rate
+        total = brl_purchase_value + iof
+        data = {
+            "ptax_exchange_rate": exchange_rate,
+            "spread": spread,
+            "nubank_exchange_rate": nubank_exchange_rate,
+            "subtotal": brl_purchase_value.quantize(Decimal('0.01'), ROUND_HALF_UP),
+            "iof_rate": iof_rate,
+            "iof": iof.quantize(Decimal('0.01'), ROUND_HALF_UP),
+            "total": total.quantize(Decimal('0.01'), ROUND_HALF_UP)
+        }
+        return data
